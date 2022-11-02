@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player/welcome_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -28,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 13),
+    Timer(const Duration(seconds: 3),
             ()=>Navigator.pushReplacement(context,
             MaterialPageRoute(builder:
                 (context) =>
@@ -39,20 +42,26 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(17, 21, 30, 1),
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Text(
-            "Mixtaplay",
-            style: TextStyle(
-              fontFamily: 'Rubik',
-              fontSize: 48,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-            ),
-          )
-        ],
+          children: const [
+            Padding(
+              padding: EdgeInsets.only(left: 65.0,),
+              child: Text(
+                "Mixtaplay",
+                style: TextStyle(
+                  fontFamily: 'Rubik',
+                  fontSize: 48,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+      ),
     );
   }
 }
